@@ -60,8 +60,8 @@ try:
     st.write(oligo1)
     st.write(oligo2)
 
-    df_guides.append({'Guide':guide_name+'.1', 'Sequence': oligo1, 'nm': '25nm', 'style': 'STD'})
-    df_guides.append({'Guide':guide_name+'.2', 'Sequence': oligo2, 'nm': '25nm', 'style': 'STD'})
+    df_guides.append({'Guide':guide_name+'.1', 'Sequence': oligo1, 'nm': '25nm', 'style': 'STD'}, ignore_index=True)
+    df_guides.append({'Guide':guide_name+'.2', 'Sequence': oligo2, 'nm': '25nm', 'style': 'STD'}, ignore_index=True)
 
     st.table(df_guides)
 
