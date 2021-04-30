@@ -5,6 +5,11 @@ import base64
 
 st.set_page_config(page_title='Brzezinski Lab Tools')
 
+
+@st.cache(allow_output_mutation=True)
+def get_data():
+    return []
+
 def download_link(object_to_download, download_filename, download_link_text):
     """
     Generates a link to download the given object_to_download.
@@ -24,19 +29,14 @@ def download_link(object_to_download, download_filename, download_link_text):
     return f'<a href="data:file/txt;base64,{b64}" download="{download_filename}">{download_link_text}</a>'
 
 st.title('Brzezinski Lab Tools')
-
-
 st.header('BbsI Guide Cloning')
 
-
-df_guides = pd.DataFrame(columns=['Guide', 'Sequence', 'nm', 'style'])
-
-col1, col2, col3 = st.beta_columns(3)
+col1, col2 = st.beta_columns(2)
 
 guide_name = col1.text_input("Guide Name:", )
 guide = col2.text_input("Input guide 5' to 3':")
 
-if col3.button('Generate Oligos'):
+if st.button('Generate Oligos'):
     try:
         if guide[0] == 'G' or guide[0] == 'g':
             optG = ''
@@ -58,21 +58,21 @@ if col3.button('Generate Oligos'):
         st.write('')
         st.write('')
         st.write('IDT Oligos to order:')
-        st.write(oligo1)
-        st.write(oligo2)
+        
+        get_data().append({'Guide':guide_name+'.1', 'Sequence': oligo1, 'nm': '25nm', 'style': 'STD'})
+        get_data().append({'Guide':guide_name+'.2', 'Sequence': oligo2, 'nm': '25nm', 'style': 'STD'})
 
-        df_guides.append({'Guide':guide_name+'.1', 'Sequence': oligo1, 'nm': '25nm', 'style': 'STD'}, ignore_index=True)
-        df_guides.append({'Guide':guide_name+'.2', 'Sequence': oligo2, 'nm': '25nm', 'style': 'STD'}, ignore_index=True)
-
-        st.table(df_guides)
+        st.table(pd.DataFrame(get_data()).set_index('Guide'))
 
     except(IndexError):
         pass
 
+st.write('')
+st.write('')
 botcol_1, botcol_2 = st.beta_columns(2)
 if botcol_1.button('Download as CSV'):
-        tmp_download_link = download_link(df_guides, 'Guides.csv', 'CSV generated! Click here to download your data!')
+        tmp_download_link = download_link(pd.DataFrame(get_data()), 'Guides.csv', 'CSV generated! Click here to download your data!')
         st.markdown(tmp_download_link, unsafe_allow_html=True)
 
 if botcol_2.button('Reset Table'):
-    df_guides = pd.DataFrame(columns=['Guide Name:', 'Sequence', 'nm', 'style'])
+    get_data().clear()
