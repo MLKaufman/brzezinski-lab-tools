@@ -31,42 +31,43 @@ st.header('BbsI Guide Cloning')
 
 df_guides = pd.DataFrame(columns=['Guide', 'Sequence', 'nm', 'style'])
 
-col1, col2 = st.beta_columns(2)
+col1, col2, col3 = st.beta_columns(3)
 
-guide_name = col1.text_input("Guide Name:")
+guide_name = col1.text_input("Guide Name:", )
 guide = col2.text_input("Input guide 5' to 3':")
 
-try:
-    if guide[0] == 'G' or guide[0] == 'g':
-        optG = ''
-        optC = ''
+if col3.button('Generate Oligos'):
+    try:
+        if guide[0] == 'G' or guide[0] == 'g':
+            optG = ''
+            optC = ''
 
-    else:
-        optG = 'g'
-        optC = 'c'
+        else:
+            optG = 'g'
+            optC = 'c'
 
-    oligo1 = 'cacc' + optG + guide
+        oligo1 = 'cacc' + optG + guide
 
-    guide_dna = Seq(guide)
+        guide_dna = Seq(guide)
 
-    oligo2 = 'aaac' + str(guide_dna.reverse_complement()) + optC
+        oligo2 = 'aaac' + str(guide_dna.reverse_complement()) + optC
 
-    st.write("Guide length:" + str(len(guide)))
-    if optG == 'g': st.write('U6 extra G added.')
+        st.write("Guide length:" + str(len(guide)))
+        if optG == 'g': st.write('U6 extra G added.')
 
-    st.write('')
-    st.write('')
-    st.write('IDT Oligos to order:')
-    st.write(oligo1)
-    st.write(oligo2)
+        st.write('')
+        st.write('')
+        st.write('IDT Oligos to order:')
+        st.write(oligo1)
+        st.write(oligo2)
 
-    df_guides.append({'Guide':guide_name+'.1', 'Sequence': oligo1, 'nm': '25nm', 'style': 'STD'}, ignore_index=True)
-    df_guides.append({'Guide':guide_name+'.2', 'Sequence': oligo2, 'nm': '25nm', 'style': 'STD'}, ignore_index=True)
+        df_guides.append({'Guide':guide_name+'.1', 'Sequence': oligo1, 'nm': '25nm', 'style': 'STD'}, ignore_index=True)
+        df_guides.append({'Guide':guide_name+'.2', 'Sequence': oligo2, 'nm': '25nm', 'style': 'STD'}, ignore_index=True)
 
-    st.table(df_guides)
+        st.table(df_guides)
 
-except(IndexError):
-    pass
+    except(IndexError):
+        pass
 
 botcol_1, botcol_2 = st.beta_columns(2)
 if botcol_1.button('Download as CSV'):
