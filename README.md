@@ -12,3 +12,4 @@ Enter a guide sequence from a guide designing tools. Suggested sources are Bench
 Outputs oligos suitable for ordering from IDT for insertion via BbsI golden gate ligation cloning into pX458 based CRISPR/Cas9 backbones.
 
 ## Examples
+![BbsI Cloning](bbsi.png)
