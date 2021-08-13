@@ -9,7 +9,10 @@ Demo: https://brzezinski-lab-tools.herokuapp.com/
 ### CRISPR/Cas9 Guide to pX458 CompatibleCloning Oligos  
 Enter a guide sequence from a guide designing tools. Suggested sources are Benchling.com or http://crispor.tefor.net/. 
 
-Outputs oligos suitable for ordering from IDT for insertion via BbsI golden gate ligation cloning into pX458 based CRISPR/Cas9 backbones.
+Outputs oligos with overhangs suitable for ordering from IDT for insertion via BbsI golden gate ligation cloning into pX458 based CRISPR/Cas9 backbones.
 
-## Examples
+## Example Web App:  
+<BR>
+<BR>
+
 ![BbsI Cloning](bbsi.png)
