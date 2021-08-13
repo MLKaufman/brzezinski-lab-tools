@@ -1,7 +1,7 @@
 # brzezinski-lab-tools
 
-Collection of quick tools for repetative tasks in the Brzezinski Lab.  
-Also serves as a demo for depolying a Python app from GitHub to Heroku.  
+Collection of quick tools for repetitive tasks in the Brzezinski Lab.  
+Also serves as a demo for deploying a Python app from GitHub to Heroku.  
 Demo: https://brzezinski-lab-tools.herokuapp.com/
 
 
